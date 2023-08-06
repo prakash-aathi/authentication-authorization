@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.examly.springapp.dto.ERole;
+import com.examly.springapp.dto.LoginModel;
 import com.examly.springapp.model.AdminModel;
-import com.examly.springapp.model.ERole;
-import com.examly.springapp.model.LoginModel;
 import com.examly.springapp.model.UserModel;
 import com.examly.springapp.repository.UserRepository;
 import com.examly.springapp.security.securityConfig.JwtUtils;
@@ -53,7 +53,7 @@ public class AuthController {
 		UserModel user = UserModel.builder()
 				.email(adminModel.getEmail())
 				.mobileNumber(adminModel.getMobileNumber())
-				.userRole(ERole.admin)
+				.userRole(ERole.ADMIN)
 				.password(encoder.encode(adminModel.getPassword()))
 				.build();
 
@@ -70,7 +70,7 @@ public class AuthController {
 				.email(userModel.getEmail())
 				.username(userModel.getUsername())
 				.mobileNumber(userModel.getMobileNumber())
-				.userRole(ERole.user)
+				.userRole(ERole.USER)
 				.password(encoder.encode(userModel.getPassword()))
 				.build();
 		
@@ -136,8 +136,8 @@ public class AuthController {
 	@GetMapping("/dashboard")
 	public ResponseEntity<?> dashboard(Principal principal) {
 		UserModel userModel = userRepository.findByEmail(principal.getName())
-				.orElseThrow(() -> new UsernameNotFoundException(USER_NAME_NOT_FOUND_EXCEPTION) );
-		if(!userModel.getUserRole().equals(ERole.admin)) {
+				.orElseThrow(() -> new UsernameNotFoundException(USER_NAME_NOT_FOUND_EXCEPTION));
+		if (!userModel.getUserRole().equals(ERole.ADMIN)) {
 			return ResponseEntity.status(HttpStatus.FORBIDDEN)
 					.body("You are not authorized to access this resource.");
 		}

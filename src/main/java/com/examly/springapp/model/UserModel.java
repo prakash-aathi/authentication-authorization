@@ -3,7 +3,11 @@ package com.examly.springapp.model;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
+
+import com.examly.springapp.dto.ERole;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,7 +21,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserModel {
 
-    @Id
+	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private Long id;
 	private String email;
 	private String username;
 	private String mobileNumber;
