@@ -22,11 +22,11 @@ This project is a demo of Spring Boot application with JWT-based authentication 
 1, Clone the repository:
 
 ```
-git clone https://github.com/<your-username>/<your-repo>.git
+git clone https://github.com/prakash-aathi/authentication-authorization.git
 ```
 2, Go to the project directory:
 ```
-cd <your-repo>
+cd authentication-authorization
 ```
 3, Build the project:
 ```
